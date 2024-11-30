@@ -7,31 +7,65 @@
     <style>
         /* Cài đặt ảnh nền cho toàn bộ trang */
         body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('./đường\ đi-01.png'); /* Thay 'your-image-url.jpg' bằng đường dẫn ảnh của bạn */
-    background-size: cover; /* Làm cho ảnh nền bao phủ toàn bộ màn hình */
-    background-position: center center; /* Căn giữa ảnh nền */
-    background-attachment: fixed; /* Giữ ảnh nền cố định khi cuộn trang */
-    color: white; /* Màu chữ sáng để nổi bật trên nền tối */
-    height: 100vh; /* Chiều cao 100% của màn hình */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('./đường\ đi-01.png'); /* Thay 'your-image-url.jpg' bằng đường dẫn ảnh của bạn */
+            background-size: cover; /* Làm cho ảnh nền bao phủ toàn bộ màn hình */
+            background-position: center center; /* Căn giữa ảnh nền */
+            background-attachment: fixed; /* Giữ ảnh nền cố định khi cuộn trang */
+            color: white; /* Màu chữ sáng để nổi bật trên nền tối */
+            height: 100vh; /* Chiều cao 100% của màn hình */
+            width: 100%; /* Chiều rộng đầy đủ */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+            align-items: center; /* Căn giữa nội dung theo chiều ngang */
+            overflow: hidden; /* Ngăn không cho cuộn trang */
+        }
 
-        /* Đặt khối chứa bản đồ */
+        /* Chia phần dưới thành 2 cột (bản đồ và mô tả) */
         .map-container {
-            width: 70%;
-            height: 80%;
-            margin: auto;
-            margin-bottom: 15px;
             margin-top: 300px;
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            height: 60%; /* Giới hạn chiều cao cho phần chứa bản đồ và mô tả */
+        }
+
+        /* Phần mô tả */
+        .description {
+            width: 40%; /* Chiếm 40% chiều rộng */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Màu nền mờ cho mô tả */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
+        }
+
+        .description h2{
+            font-size: 24px;
+            color: #000;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .description .desc{
+            font-size:16px;
+            color: #000000;
+            margin-top: 10px;
+        }
+
+
+
+        /* Phần bản đồ */
+        .map {
+            width: 55%; /* Chiếm 55% chiều rộng */
+            height: 100%; /* Chiều cao của bản đồ bằng với chiều cao của container */
             background: rgba(255, 255, 255, 0.8); /* Màu nền mờ cho bản đồ */
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         /* Cài đặt cho iframe (bản đồ) */
@@ -41,15 +75,7 @@
             border: none;
         }
 
-        /* Phần mô tả và text */
-        .description {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
+        /* Link dẫn đến toàn bộ bản đồ */
         .button-link {
             position: absolute;
             bottom: 20px;
@@ -66,21 +92,74 @@
         .button-link:hover {
             background-color: #e64a19;
         }
+/* Media Queries: Điều chỉnh cho các màn hình nhỏ hơn (Điện thoại) */
+@media (max-width: 768px) {
+            body {
+                height: auto; /* Không cố định chiều cao cho màn hình nhỏ */
+                padding: 20px; /* Thêm khoảng cách cho các thiết bị nhỏ */
+                background-image: url('./dock-02.png'); /* Thay ảnh nền khi màn hình nhỏ hơn 768px */
+            }
+
+            .map-container {
+                flex-direction: column; /* Xếp theo chiều dọc */
+                width: 100%; /* Đảm bảo chiều rộng 100% */
+                height: auto; /* Chiều cao tự động */
+            }
+
+            .description {
+                width: 100%; /* Chiếm toàn bộ chiều rộng */
+                font-size: 20px; /* Giảm kích thước chữ */
+                padding: 10px;
+                margin-bottom: 15px; /* Khoảng cách giữa mô tả và bản đồ */
+            }
+
+            .map {
+                width: 100%; /* Chiếm toàn bộ chiều rộng */
+                height: 250px; /* Giới hạn chiều cao bản đồ */
+            }
+
+            .button-link {
+                font-size: 16px; /* Giảm kích thước chữ cho nút */
+                padding: 8px 15px;
+            }
+        }
+
+        /* Media Queries cho màn hình rất nhỏ (Điện thoại cực kỳ nhỏ hoặc máy tính bảng) */
+        @media (max-width: 480px) {
+            body {
+                background-image: url('./dock-02.png'); /* Thay ảnh nền cho điện thoại nhỏ */
+            }
+
+            .description {
+                font-size: 18px; /* Giảm kích thước chữ thêm nữa */
+                padding: 8px;
+            }
+
+            .map {
+                height: 200px; /* Giảm chiều cao bản đồ */
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Phần chứa bản đồ -->
+    <!-- Phần chứa bản đồ và mô tả -->
     <div class="map-container">
-        <!-- Mô tả đường đi -->
+        <!-- Phần mô tả đường đi -->
         <div class="description">
-            Mô tả đường đi
+            <h2>Mô tả đường đi</h2>
+            <div class="desc">1. Sau khi xuống chân cầu Vĩnh Tuy rẽ phải vào "Ngõ 84 Đàm Quang Trung"</div>
+            <div class="desc">2. Đi thẳng rồi rẽ phải vào "ngõ 313 Đàm Quang Trung"</div>
+            <div class="desc">3. Đi hết ngõ 313 rẽ phải vào "đường Bát Khối", đi thẳng qua cây xăng</div>
+            <div class="desc">4. Đi đến chân cầu rẽ trái và đi dọc gầm "cầu Vĩnh Tuy", cho đến địa điểm có biển chỉ dẫn hoặc theo định vị</div>
         </div>
-        <!-- Chèn bản đồ -->
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ud2es1iVR9ogxPftoKQj3bzObmnauZk&ehbc=2E312F" width="640" height="480"></iframe>
-        <!-- Link dẫn đến toàn bộ bản đồ -->
-        <a href="https://www.google.com/maps/d/u/0/edit?mid=1ud2es1iVR9ogxPftoKQj3bzObmnauZk&ehbc=2E312F" class="button-link" target="_blank">
-            Bấm vào để xem toàn bộ bản đồ
-        </a>
+        <!-- Phần bản đồ -->
+        <div class="map">
+            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ud2es1iVR9ogxPftoKQj3bzObmnauZk&ehbc=2E312F"></iframe>
+        </div>
     </div>
+    <!-- Link dẫn đến toàn bộ bản đồ -->
+    <a href="https://www.google.com/maps/d/u/0/edit?mid=1ud2es1iVR9ogxPftoKQj3bzObmnauZk&ehbc=2E312F" class="button-link" target="_blank">
+        Bấm vào để xem toàn bộ bản đồ
+    </a>
 </body>
 </html>
